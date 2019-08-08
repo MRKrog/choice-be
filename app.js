@@ -49,8 +49,8 @@ app.post('/api/v1/notes', async (req, res) => {
 app.delete('/api/v1/notes/:id', async (req, res) => {
   try {
     const { id } = req.params;
-    const matchingPalettes = await database('notes').where({ id });
-    if (!matchingPalettes.length) return res.sendStatus(404);
+    const matchingNotes = await database('notes').where({ id });
+    if (!matchingNotes.length) return res.sendStatus(404);
     await database('notes')
       .where({ id })
       .del();
