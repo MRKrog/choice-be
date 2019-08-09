@@ -12,6 +12,7 @@ app.get('/', (req, res) => {
   res.json('Server Running!')
 });
 
+// Getting All Orders
 app.get('/api/v1/orders', (request, response) => {
   database('orders').select()
     .then((orders) => {
@@ -22,6 +23,7 @@ app.get('/api/v1/orders', (request, response) => {
     });
 });
 
+// Getting All Notes
 app.get('/api/v1/notes', (request, response) => {
   database('notes').select()
     .then((notes) => {
@@ -50,6 +52,7 @@ app.delete('/api/v1/notes/:id', async (req, res) => {
   try {
     const { id } = req.params;
     const matchingNotes = await database('notes').where({ id });
+    console.log(matchingNotes);
     if (!matchingNotes.length) return res.sendStatus(404);
     await database('notes')
       .where({ id })
