@@ -7,7 +7,6 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-
 app.get('/', (req, res) => {
   res.json('Server Running!')
 });
@@ -52,7 +51,6 @@ app.delete('/api/v1/notes/:id', async (req, res) => {
   try {
     const { id } = req.params;
     const matchingNotes = await database('notes').where({ id });
-    console.log(matchingNotes);
     if (!matchingNotes.length) return res.sendStatus(404);
     await database('notes')
       .where({ id })
@@ -79,7 +77,5 @@ app.put('/api/v1/notes/:id', async (req, res) => {
     res.status(500).json({ error });
   }
 });
-
-
 
 module.exports = app;
